@@ -7,16 +7,67 @@
 //
 
 #import "AppDelegate.h"
+#import "MovieTabsViewController.h"
+#import "MovieListViewController.h"
+#import "MovieClient.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) MovieTabsViewController *movieTabsViewController;
+@property (nonatomic, strong) NSArray *movieListTypes;
+@property (nonatomic, strong) MovieClient *client;
+
+- (NSString *)titleizeEndpoint:(NSString *)endpoint;
 
 @end
 
 @implementation AppDelegate
 
+- (MovieClient *)client
+{
+    if (_client == nil)
+    {
+        _client = [[MovieClient alloc] init];
+    }
+    return _client;
+}
+
+
+- (MovieTabsViewController *)movieTabsViewController
+{
+    if (_movieTabsViewController == nil) {
+        _movieTabsViewController = [[MovieTabsViewController alloc] init];
+    }
+    return _movieTabsViewController;
+}
+
+- (NSArray *)movieListTypes
+{
+    if (_movieListTypes == nil) {
+        _movieListTypes = @[
+                                @"now_playing",
+                                @"popular",
+                                @"top_rated",
+                                @"upcoming"
+                            ];
+    }
+    return _movieListTypes;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    NSMutableArray *tabBarControllers = [[NSMutableArray alloc] init];
+    
+    //////////////////////////////////
+    // Add tabs here                //
+    //////////////////////////////////
+    
+    self.movieTabsViewController.viewControllers = tabBarControllers;
+    self.window.rootViewController =  self.movieTabsViewController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -47,5 +98,12 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (NSString *)titleizeEndpoint:(NSString *)endpoint
+{
+   //////////////////////////////////////////////////////////////
+   // Convenience method for converting endpoints into titles  //
+   //////////////////////////////////////////////////////////////
+}
 
 @end

@@ -1,0 +1,26 @@
+PODS:
+  - JSONModel (1.7.0)
+  - PromiseKit/CorePromise (4.1.7)
+  - PromiseKit/Foundation (4.1.7):
+    - PromiseKit/CorePromise
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - UIActivityIndicator-for-SDWebImage (1.2):
+    - SDWebImage (~> 3.7)
+
+DEPENDENCIES:
+  - JSONModel
+  - PromiseKit/Foundation
+  - SDWebImage
+  - UIActivityIndicator-for-SDWebImage
+
+SPEC CHECKSUMS:
+  JSONModel: 840bc0fcffb24b8454d2c026bf26fea454b8e98d
+  PromiseKit: 779f2e41faf62d854e7593026ddbcb0bb5c5002d
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
+
+PODFILE CHECKSUM: f7a22e0a5575763e9f8d22a4e33f9042558e8308
+
+COCOAPODS: 1.1.1
