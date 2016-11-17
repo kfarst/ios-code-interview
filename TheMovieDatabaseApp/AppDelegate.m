@@ -7,16 +7,73 @@
 //
 
 #import "AppDelegate.h"
+#import "MovieTabsViewController.h"
+#import "MovieListViewController.h"
+#import "MovieClient.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) MovieTabsViewController *movieTabsViewController;
+@property (nonatomic, strong) NSArray *movieListTypes;
+@property (nonatomic, strong) MovieClient *client;
+
+- (NSString *)titleizeEndpoint:(NSString *)endpoint;
 
 @end
 
 @implementation AppDelegate
 
+- (MovieClient *)client
+{
+    if (_client == nil)
+    {
+        _client = [[MovieClient alloc] init];
+    }
+    return _client;
+}
+
+
+- (MovieTabsViewController *)movieTabsViewController
+{
+    if (_movieTabsViewController == nil) {
+        _movieTabsViewController = [[MovieTabsViewController alloc] init];
+    }
+    return _movieTabsViewController;
+}
+
+- (NSArray *)movieListTypes
+{
+    if (_movieListTypes == nil) {
+        _movieListTypes = @[
+                                @"now_playing",
+                                @"popular",
+                                @"top_rated",
+                                @"upcoming"
+                            ];
+    }
+    return _movieListTypes;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    NSMutableArray *tabBarControllers = [[NSMutableArray alloc] init];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [self.movieListTypes enumerateObjectsUsingBlock: ^(NSString *endpoint, NSUInteger idx, BOOL *stop){
+        MovieListViewController *movieListViewController = [[MovieListViewController alloc] initWithClient: weakSelf.client forEndpoint:endpoint];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:movieListViewController];
+        navigationController.topViewController.title = [weakSelf titleizeEndpoint:endpoint];
+        navigationController.tabBarItem.title = [weakSelf titleizeEndpoint:endpoint];
+        [tabBarControllers addObject:navigationController];
+    }];
+    
+    self.movieTabsViewController.viewControllers = tabBarControllers;
+    self.window.rootViewController =  self.movieTabsViewController;
+    [self.window makeKeyAndVisible];
     return YES;
 }
 
@@ -47,5 +104,16 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (NSString *)titleizeEndpoint:(NSString *)endpoint
+{
+    NSMutableArray *capitalizedWords = [[NSMutableArray alloc] init];
+    
+    [[endpoint componentsSeparatedByString:@"_"] enumerateObjectsUsingBlock: ^(NSString *word, NSUInteger idx, BOOL *stop){
+        [capitalizedWords addObject:[word capitalizedString]];
+    }];
+    
+    return [capitalizedWords componentsJoinedByString:@" "];
+}
 
 @end
