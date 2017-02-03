@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <PromiseKit/PMKFoundation.h>
 
 @interface MovieClient : NSObject
 
 - (instancetype)init;
 
-- (void)fetchMovieList:(NSString *)listType forResult:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler;
+- (AnyPromise *)fetchMovieList:(NSString *)listType;
 
 @end

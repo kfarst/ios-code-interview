@@ -11,6 +11,7 @@
 @interface MovieClient ()
 
 @property (nonatomic, strong) NSURLSession *URLSession;
+@property (nonatomic, strong) NSOperationQueue *requestQueue;
 - (NSURLRequest *)requestForMovieListWithType:(NSString *)listType;
 
 @end
@@ -25,19 +26,22 @@ NSString *const  API_KEY = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
     self = [super init];
     
     if (self != nil) {
-        self.URLSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
+        self.URLSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:self.requestQueue];
     }
     
     return self;
 }
 
-- (void)fetchMovieList:(NSString *)listType forResult:(void (^)(NSData *data, NSURLResponse *response, NSError *error))completionHandler
+-(NSOperationQueue *) requestQueue {
+    if (_requestQueue == nil) {
+        _requestQueue = [[NSOperationQueue alloc] init];
+    }
+    return _requestQueue;
+}
+
+- (AnyPromise *)fetchMovieList:(NSString *)listType
 {
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    NSURLSessionDataTask *task = [self.URLSession dataTaskWithRequest:[self requestForMovieListWithType:listType] completionHandler:completionHandler];
-    
-    [task resume];
+    return [self.URLSession promiseDataTaskWithRequest:[self requestForMovieListWithType:listType]];
 }
 
 - (NSURLRequest *)requestForMovieListWithType:(NSString *)listType

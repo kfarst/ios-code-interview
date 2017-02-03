@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MovieClient.h"
+#import <PromiseKit/PMKFoundation.h>
 
 @interface MovieListViewController : UITableViewController
 

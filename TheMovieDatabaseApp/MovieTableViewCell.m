@@ -7,8 +7,7 @@
 //
 
 #import <SDWebImage/UIImageView+WebCache.h>
-#import <UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h>
-
+#import "UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "MovieTableViewCell.h"
 #import "MovieModel.h"
 
