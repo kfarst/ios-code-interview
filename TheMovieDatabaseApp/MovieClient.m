@@ -11,7 +11,6 @@
 @interface MovieClient ()
 
 @property (nonatomic, strong) NSURLSession *URLSession;
-@property (nonatomic, strong) NSOperationQueue *requestQueue;
 - (NSURLRequest *)requestForMovieListWithType:(NSString *)listType;
 
 @end
@@ -26,17 +25,10 @@ NSString *const  API_KEY = @"a07e22bc18f5cb106bfe4cc1f83ad8ed";
     self = [super init];
     
     if (self != nil) {
-        self.URLSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:self.requestQueue];
+        self.URLSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration] delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
     }
     
     return self;
-}
-
--(NSOperationQueue *) requestQueue {
-    if (_requestQueue == nil) {
-        _requestQueue = [[NSOperationQueue alloc] init];
-    }
-    return _requestQueue;
 }
 
 @end

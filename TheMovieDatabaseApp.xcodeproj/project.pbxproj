@@ -274,6 +274,7 @@
 				TargetAttributes = {
 					25D661191DD977B800591C52 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = V5X2UCZH4N;
 						ProvisioningStyle = Automatic;
 					};
 					25D661321DD977B800591C52 = {
@@ -614,6 +615,8 @@
 			baseConfigurationReference = 19485EAD05DDCE413B085EA8 /* Pods-TheMovieDatabaseApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = V5X2UCZH4N;
 				INFOPLIST_FILE = TheMovieDatabaseApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kfarst.TheMovieDatabaseApp;
@@ -626,6 +629,8 @@
 			baseConfigurationReference = 87FA9E73C1F2C7E097950F87 /* Pods-TheMovieDatabaseApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = V5X2UCZH4N;
 				INFOPLIST_FILE = TheMovieDatabaseApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.kfarst.TheMovieDatabaseApp;
